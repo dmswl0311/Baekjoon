@@ -1,22 +1,13 @@
-import sys
 list = []
-list2 = []
-count = 10
+cnt = 0
+for i in range(10):
+    n = int(input())
+    result = n % 42
+    list.append(result)
 
 for i in range(10):
-    x = int(sys.stdin.readline().rstrip())
-    list.append(x)
-
-for i in list:
-    y = i % 42
-    list2.append(y)
-
-for i in range(9):
-    for j in range(9):
-        if list2[i] == list2[j]:
-            count = count - 1
+    for j in range(1, 10-i):
+        if list[i] == list[i+j]:
+            cnt += 1
             break
-        else:
-            continue
-
-print(count)
+print(10-cnt)
