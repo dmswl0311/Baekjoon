@@ -1,17 +1,19 @@
-import sys
+s = input()
+dic = {'A': 2, 'B': 2, 'C': 2, 'D': 3, 'E': 3, 'F': 3, 'G': 4, 'H': 4, 'I': 4,
+       'J': 5, 'K': 5, 'L': 5, 'M': 6, 'N': 6, 'O': 6, 'P': 7, 'Q': 7, 'R': 7, 'S': 7,
+       'T': 8, 'U': 8, 'V': 8, 'W': 9, 'X': 9, 'Y': 9, 'Z': 9}
 
-text = ""
-text = str(sys.stdin.readline())
+number = [0]*len(s)
 
-dic = {2: "1", 3: "ABC", 4: "DEF", 5: "GHI",
-       6: "JKL", 7: "MNO", 8: "PQRS", 9: "TUV", 10: "WXYZ",11: "0"}
+for i in range(len(s)):
+    number[i] = dic.get(s[i])
 
-list = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
-        "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+result = 0
 
-for i in text:
-        if (i=='A'):
-                
+for i in number:
+    if(0 < i < 10):
+        result += i+1
+    elif(i == 0):
+        result += 10
 
-0으로 초기화
-1 -> 2초 필요
+print(result)
