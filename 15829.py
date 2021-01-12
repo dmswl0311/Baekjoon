@@ -1,3 +1,5 @@
+# 문제에 H mod M은 H를 M으로 나눈 나머지 값을 구하라는 것..!
+
 l = int(input())
 s = str(input())
 h = 0
