@@ -14,7 +14,7 @@ else:
         print(day+2)
 
 
-# 시간초과 코드
+# 시간초과
 # x = 1
 # p = 0
 # while(True):
