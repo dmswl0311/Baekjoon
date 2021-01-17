@@ -14,7 +14,6 @@ for i in range(n):
 
 count = 0
 result = list(set(result))
-result.sort(key=lambda x: (x[0]))
 result.sort(key=lambda x: (x[1]), reverse=True)
 
 m = result[0][1]  # 최빈값 빈도수
@@ -23,10 +22,10 @@ for i in range(n):
     if (result[i][1] == m):
         result2.append(result[i][0])
         count += 1
-    else:
-        continue
+    elif (result[i][1] < m):
+        break
     if count == 2:
         break
-
+result2.sort()
 print(result2[-1])
 print(a[-1]-a[0])
