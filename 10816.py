@@ -1,13 +1,11 @@
 # 단일 target 아님, 중복도 존재 -> 이진탐색이 적합하지 않음
 
-import sys
+from sys import stdin
 
-n = int(sys.stdin.readline())
-a = list(map(int, sys.stdin.readline().split()))
-m = int(sys.stdin.readline())
-b = list(map(int, sys.stdin.readline().split()))
-
-a.sort()
+n = int(stdin.readline())
+a = sorted(list(map(int, stdin.readline().split())))
+m = int(stdin.readline())
+b = list(map(int, stdin.readline().split()))
 
 
 def binary(array, target, start, end):
