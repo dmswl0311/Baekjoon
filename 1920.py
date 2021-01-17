@@ -4,42 +4,23 @@ n = int(sys.stdin.readline())
 array1 = list(map(int, sys.stdin.readline().split()))
 m = int(sys.stdin.readline())
 array2 = list(map(int, sys.stdin.readline().split()))
-result = [0]*m
 
-# for i in range(m):
-#     for j in range(n):
-#         if (array2[i] == array1[j]):
-#             result[i] = 1
-#             break
-#         else:
-#             result[i] = 0
-#             continue
+array1.sort()
 
-array1 = sorted(array1)
-array2 = sorted(array2)
-array3 = array1
 
-print(array1)
+def binary(array, target, start, end):
+    if start > end:
+        return 0
 
-for i in range(m):
-    if array2[i] <= array3[(len(array3)//2)]:
-        array3 = array3[:(len(array3)//2)+1]
-        for j in range(len(array3)):
-            if (array2[i] == array3[j]):
-                result[i] = 1
-                break
-            else:
-                result[i] = 0
-                continue
+    mid = (start+end)//2
+
+    if (array[mid] == target):
+        return 1
+    elif (array[mid] > target):
+        return binary(array, target, start, mid-1)
     else:
-        array3 = array3[(len(array3)//2)+1:]
-        for j in range(len(array3)):
-            if (array2[i] == array3[j]):
-                result[i] = 1
-                break
-            else:
-                result[i] = 0
-                continue
+        return binary(array, target, mid+1, end)
 
-for i in result:
-    print(i)
+
+for i in array2:
+    print(binary(array1, i, 0, n-1))
