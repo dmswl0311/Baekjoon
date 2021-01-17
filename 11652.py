@@ -1,13 +1,12 @@
-# 계수 정렬? 놉
 import sys
 
 n = int(sys.stdin.readline())
 array = [int(sys.stdin.readline()) for _ in range(n)]
-count = []
+count = [0]*n
 
-for i in range(len(array)):
-    count.append((array[i], array.count(array[i])))
+for i in range(n):
+    count[i] = (array[i], array.count(array[i]))
 
-count.sort(key=lambda x: x[1], reverse=True)
+count.sort(key=lambda x: (-x[1], x[0]))
 
 print(count[0][0])
