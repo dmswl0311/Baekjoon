@@ -1,19 +1,19 @@
-from sys import stdin
+import sys
 
-k, n = map(int, stdin.readline().split())
-array = [int(stdin.readline()) for _ in range(k)]
+k, n = map(int, sys.stdin.readline().split())
+array = [int(sys.stdin.readline()) for _ in range(k)]
 result = 0
 
-start = 0
+start = 1
 end = max(array)
 
-while(start < end):
-    mid = (start+end)//2
+while(start <= end):
     sum = 0
+    mid = (start+end)//2
 
     for i in array:
-        if mid < i:
-            sum += (i//mid)
+        sum += (i//mid)
+
     if sum < n:
         end = mid-1
     else:
