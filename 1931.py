@@ -1,27 +1,20 @@
-import sys
+from sys import stdin
 
-n = int(sys.stdin.readline())
-a = [0]*n
+n = int(stdin.readline())
 array = [0]*n
-
+result = []
 for i in range(n):
-    start, end = map(int, sys.stdin.readline().split())
-    a[i] = (start, end)
+    start, end = map(int, stdin.readline().split())
+    array[i] = (start, end)
 
-a.sort(key=lambda x: (x[0], x[1]))
-result = 1
-i = 0
+array.sort(key=lambda x: (x[0], x[1]))
+for i in range(n):
+    cnt = 1
+    next = i
+    for j in range(i+1, n):
+        if (array[next][1] <= array[j][0]):
+            next = j
+            cnt += 1
+    result.append(cnt)
 
-while(i < n):
-    start = i
-    for j in range(start+1, n):
-        if (a[start][0] <= a[j][0] and a[start][1] <= a[j][0]):
-            result += 1
-            start = j
-        else:
-            continue
-    array[i] = result
-    i += 1
-    result = 1
-
-print(max(array))
+print(max(result))
