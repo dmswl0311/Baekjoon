@@ -4,24 +4,30 @@ from sys import stdin
 n, k = map(int, stdin.readline().split())
 array = []
 result = []
+
 for i in range(1, n+1):
     array.append(i)
-
-start = 0
-
-while(len(array) != 3):
-    if (start+3) < n:
-        a = array[start+3]
-        array.pop(start+3)
-        start = start+3
+q = deque()
+start = k-1
+for _ in range(n):
+    if len(array) == 1:
+        p = array.pop()
+        q.append(p)
+        break
     else:
-        a = array[(start+3)-n-1]
-        array.pop((start+3)-n-1)
-        start = (start+3)-n-1
+        p = array.pop(start)
+        q.append(p)
+    if (start+k-1) >= len(array):
+        start = start+k-1
+        while(start >= len(array)):
+            start = start-len(array)
+    else:
+        start = start+k-1
 
-    result.append(a)
-
-for i in range(3):
-    result.append(array[i])
-
-print(result)
+print("<", end='')
+for i in range(len(q)):
+    if i == len(q)-1:
+        print(q[i], end='')
+    else:
+        print(q[i], end=', ')
+print(">", end='')
