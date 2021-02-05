@@ -1,5 +1,5 @@
 # 경쟁적 전염
-# 큐
+# 큐, BFS
 
 from collections import deque
 from sys import stdin
