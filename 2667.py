@@ -1,3 +1,6 @@
+# DFS
+# 음료수 얼려 먹기 문제와 유사
+
 from sys import stdin
 
 n = int(stdin.readline())
