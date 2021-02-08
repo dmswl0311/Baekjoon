@@ -1,3 +1,6 @@
+# BFS
+# 18405 경쟁적 전염과 유사
+
 from collections import deque
 from sys import stdin
 
