@@ -1,3 +1,6 @@
+# BFS
+# 미로 탐색과 유사
+
 from collections import deque
 from sys import stdin
 
