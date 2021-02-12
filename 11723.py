@@ -1,4 +1,6 @@
-m = int(input())
+from sys import stdin
+
+m = int(stdin.readline())
 array = []
 
 
@@ -29,7 +31,7 @@ def toggle(x):
 qq = []
 
 for _ in range(m):
-    s = input().rstrip().split()
+    s = stdin.readline().rstrip().split()
     if s[0] == "add":
         add(int(s[1]))
     elif s[0] == "remove":
@@ -46,7 +48,7 @@ for _ in range(m):
         array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                  11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     elif s[0] == "empty":
-        array = []
+        array.clear()
 
 for i in qq:
     print(i)
