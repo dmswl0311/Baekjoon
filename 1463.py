@@ -1,20 +1,14 @@
+# DP
+
 x = int(input())
-cnt = 0
+d = [0]*(x+1)
 
-if x >= 3:
-    while(x != 1):
-        while(x % 3 != 0):
-            x -= 1
-            cnt += 1
-        x = x//3
-        cnt += 1
+for i in range(2, x+1):
+    d[i] = d[i-1]+1
 
-elif:
-    while(x != 1):
-        while(x % 2 != 0):
-            x -= 1
-            cnt += 1
-        x = x//2
-        cnt += 1
+    if i % 2 == 0:
+        d[i] = min(d[i], d[i//2]+1)
+    if i % 3 == 0:
+        d[i] = min(d[i], d[i//3]+1)
 
-print(cnt)
+print(d[x])
