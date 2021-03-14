@@ -1,4 +1,6 @@
 import sys
+import heapq
+
 input = sys.stdin.readline
 INF = int(1e9)
 
@@ -14,18 +16,13 @@ for _ in range(T):
     # 출발지 후보 저장
     result = []
 
-    graph = [[INF]*(n+1) for _ in range(n+1)]
-
-    for i in range(1, n+1):
-        for j in range(1, n+1):
-            if i == j:
-                graph[i][j] = 0
+    graph = [[] for _ in range(n+1)]
 
     for _ in range(m):
         a, b, d = map(int, input().split())
         # 양방향 도로
-        graph[a][b] = d
-        graph[b][a] = d
+        graph[a].append((b, d))
+        graph[b].append((a, d))
 
     for i in range(t):
         x = int(input())
@@ -33,13 +30,28 @@ for _ in range(T):
 
     result.sort()
 
-    for k in range(1, n+1):
-        for a in range(1, n+1):
-            for b in range(1, n+1):
-                graph[a][b] = min(graph[a][b], graph[a][k]+graph[k][b])
+    def dijkstra(start):
+        distance = [INF]*(n+1)
+        h = []
+        heapq.heappush(h, (0, start))
+        distance[start] = 0
 
-    print(graph)
-    for end in result:
-        if ((graph[s][g] != INF) and (graph[g][h] != INF) and (graph[h][end] != INF)):
-            print(end, end=" ")
+        while(h):
+            dist, now = heapq.heappop(h)
+            if distance[now] < dist:
+                continue
+            for i in graph[now]:
+                cost = i[1]+dist
+                if cost < distance[i[0]]:
+                    distance[i[0]] = cost
+                    heapq.heappushpop(h, (cost, i[0]))
+        return distance
+
+    start = dijkstra(s)
+    g_g = dijkstra(g)
+    h_g = dijkstra(h)
+
+    for e in result:
+        if ((start[g]+g_g[h]+h_g[e] <= start[e]) or (start[h]+h_g[g]+g_g[e] <= start[e])):
+            print(e, end=" ")
     print("")
