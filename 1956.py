@@ -12,18 +12,25 @@ for i in range(1, v+1):
             graph[i][j] = 0
 
 for _ in range(e):
-    x, y, z = map(int, input().split())
-    graph[x][y] = z
+    a, b, c = map(int, input().split())
+    graph[a][b] = c
 
 for k in range(1, v+1):
     for a in range(1, v+1):
         for b in range(1, v+1):
             graph[a][b] = min(graph[a][b], graph[a][k]+graph[k][b])
 
+comp = INF
+
 for i in range(1, v+1):
     for j in range(1, v+1):
-        if graph[i][j] != INF:
-            print(graph[i][j], end=" ")
-        else:
-            print("INFINITY", end=" ")
-    print(" ")
+        if i != j:
+            if graph[i][j] != INF and graph[j][i] != INF:
+                comp = min(comp, graph[i][j]+graph[j][i])
+            else:
+                continue
+
+if comp == INF:
+    print(-1)
+else:
+    print(comp)
