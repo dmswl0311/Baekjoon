@@ -1,3 +1,5 @@
+# 플로이드 워셜 알고리즘을 역으로 이용
+
 import sys
 input = sys.stdin.readline
 
