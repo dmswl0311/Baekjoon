@@ -1,8 +1,8 @@
-from collections import deque
+import sys
+input = sys.stdin.readline
 
 r, c, t = map(int, input().split())
 graph = [list(map(int, input().split())) for _ in range(r)]
-visited = [[False]*c for _ in range(r)]
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
@@ -16,17 +16,18 @@ def dust():
     graph_dust = [[0]*c for _ in range(r)]
 
     # 미세먼지가 있는 좌표 따로 저장 (시간 단축), 공기청정기 위치 저장
-    dust = []
+    dust_list = []
     air_machine = []
+
     for i in range(r):
         for j in range(c):
-            if graph[i][j] != 0 and graph[i][j] != -1:
-                dust.append((i, j))
+            if graph[i][j] > 0:
+                dust_list.append((i, j))
             if graph[i][j] == -1:
                 air_machine.append((i, j))
                 graph_dust[i][j] = -1
 
-    for x, y in dust:
+    for x, y in dust_list:
         cnt = 0
         for next in range(4):
             nx = x+dx[next]
@@ -46,6 +47,8 @@ def air():
     global c
     r = r-1
     c = c-1
+    graph_dust[air_machine[0][0]][0] = 0
+    graph_dust[air_machine[1][0]][0] = 0
     # 반시계방향 연산 -----------
     row = air_machine[0][0]
 
@@ -76,23 +79,40 @@ def air():
         graph_dust[row][i] = graph_dust[row][i-1]
     graph_dust[row][0] = 0
 
+    temp1 = graph_dust[r][c]
+    for i in range(r, row+1, -1):
+        graph_dust[i][c] = graph_dust[i-1][c]
+    graph_dust[row+1][c] = temp
+
+    temp2 = graph_dust[r][0]
+    for i in range(0, c-1):
+        graph_dust[r][i] = graph_dust[r][i+1]
+    graph_dust[r][c-1] = temp1
+
+    for i in range(row-1, r-1, +1):
+        graph_dust[i][0] = graph_dust[i+1][0]
+    graph_dust[r-1][0] = temp2
+
+    graph_dust[air_machine[0][0]][0] = -1
+    graph_dust[air_machine[1][0]][0] = -1
+
+    r = r+1
+    c = c+1
+
 
 for _ in range(t):
     dust()
     air()
-    r = r+1
-    c = c+1
     # 원래 그래프에 확산한 graph_dust 옮기기
     for i in range(r):
         for j in range(c):
             graph[i][j] = graph_dust[i][j]
 
-cnt = 0
+cnt_result = 0
 
 for i in range(r):
     for j in range(c):
         if graph[i][j] > 0:
-            cnt += graph[i][j]
+            cnt_result += graph[i][j]
 
-print(graph)
-print(cnt)
+print(cnt_result)
